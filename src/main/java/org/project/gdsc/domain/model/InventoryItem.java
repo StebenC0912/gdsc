@@ -5,4 +5,8 @@ public class InventoryItem {
     private int height;
     private int weight;
     private int width;
+
+    public double volumn() {
+        return height * weight * width;
+    }
 }
