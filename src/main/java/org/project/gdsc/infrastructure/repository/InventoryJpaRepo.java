@@ -1,5 +1,6 @@
 package org.project.gdsc.infrastructure.repository;
 
-public class InventoryJpaRepo {
-    
+
+import org.springframework.data.jpa.repository.JpaRepository;
+public interface InventoryJpaRepo extends JpaRepository<InventoryEntity, Integer> {
 }

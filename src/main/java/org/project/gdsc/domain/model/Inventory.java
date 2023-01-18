@@ -1,16 +1,14 @@
 package org.project.gdsc.domain.model;
+
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Collections;
-import jakarta.persistence.GeneratedValue;
 import java.util.List;
 
-import jakarta.persistence.GenerationType;
-import lombok.Getter;
-import org.springframework.data.annotation.Id;
-
 @Getter
+@Setter
 public class Inventory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int height;
     private int weight;

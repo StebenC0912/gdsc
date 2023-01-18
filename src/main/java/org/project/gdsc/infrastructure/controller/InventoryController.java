@@ -16,8 +16,8 @@ public class InventoryController {
     private InventoryService inventoryService;
     @PostMapping
     public ResponseEntity<Integer> createInventory(@RequestBody Inventory inventory) throws Exception{
-        Inventory SaveInventory = inventoryService.createInventory(inventory);
-        return new ResponseEntity<>(SaveInventory.getId(), HttpStatus.resolve(200));
+        inventoryService.createInventory(inventory);
+        return new ResponseEntity<>(inventory.getId(), HttpStatus.resolve(200));
     }
     @PostMapping
     public ResponseEntity<List<Inventory>> getAllInventory() {
