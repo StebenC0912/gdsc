@@ -14,10 +14,10 @@ public class InventoryRepositoryImpl implements InventoryRepository {
 
 
     @Override
-    public int save(Inventory inventory) {
+    public Inventory save(Inventory inventory) {
         final InventoryEntity entity = InventoryEntity.fromDomainModel(inventory);
-        inventoryJpaRepo.save(entity);
-        return entity.getId();
+        final InventoryEntity savedEntity = inventoryJpaRepo.save(entity);
+        return savedEntity.toDomainModel();
     }
 
     @Override

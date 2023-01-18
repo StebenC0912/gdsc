@@ -5,19 +5,22 @@ import org.project.gdsc.domain.model.InventoryItem;
 import org.project.gdsc.domain.service.InventoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/inventory")
 public class InventoryController {
     private InventoryService inventoryService;
     @PostMapping
     public ResponseEntity<Integer> createInventory(@RequestBody Inventory inventory) throws Exception{
-        inventoryService.createInventory(inventory);
-        return new ResponseEntity<>(inventory.getId(), HttpStatus.resolve(200));
+        try {
+            Inventory createdInventory = inventoryService.createInventory(inventory);
+            return new ResponseEntity<>(createdInventory.getId(), HttpStatus.OK);
+        } catch (InvalidInventoryException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
     @PostMapping
     public ResponseEntity<List<Inventory>> getAllInventory() {

@@ -12,17 +12,15 @@ public class InventoryService {
     @Autowired
     private InventoryRepository inventoryRepository;
 
-    public void createInventory(Inventory inventory) throws Exception {
+    public Inventory createInventory(Inventory inventory) throws Exception {
         if (inventory.getHeight() < 0) {
             throw new Exception("height phải lớn hơn 0");
         } else if (inventory.getWeight() < 0) {
             throw new Exception("weight phải lớn hơn 0");
         } else if (inventory.getWidth() < 0) {
             throw new Exception("width phải lớn hơn 0");
-        } else {
-            inventoryRepository.save(inventory);
         }
-
+            return inventoryRepository.save(inventory);
     }
     public List<Inventory> getAllInventory() {
         return inventoryRepository.findAll();
