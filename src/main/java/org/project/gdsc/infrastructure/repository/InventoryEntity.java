@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.project.gdsc.domain.model.Inventory;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -30,23 +28,8 @@ public class InventoryEntity {
     private int width;
     @Column (name = "inventoryItems")
     private String inventoryItems;
-    public <InventoryItemEntity> InventoryEntity(Inventory inventory) {
-        this.id = inventory.getId();
-        this.weight = inventory.getWeight();
-        this.width = inventory.getWidth();
-        this.height = inventory.getHeight();
-        if (inventory.getInventoryItem() != null) {
-            this.inventoryItems = inventory.getInventoryItem().stream().map(inventoryItem -> {
-                InventoryItemEntities item = new InventoryItemEntities(inventoryItem);
-                item.setInventory(this);
-                return item;
-            }).collect(Collectors.toList()).toString();
-        } else {
-            this.inventoryItems = new ArrayList<>().toString();
-        }
-    }
     public static InventoryEntity fromDomainModel(Inventory inventory) {
-        final InventoryEntity entity = new InventoryEntity(inventory);
+        final InventoryEntity entity = new InventoryEntity();
         entity.id = inventory.getId();
         entity.height = inventory.getHeight();
         entity.width = inventory.getWidth();
@@ -60,10 +43,11 @@ public class InventoryEntity {
     }
 
     public Inventory toDomainModel() {
-        final Inventory inventory = new Inventory();
+        Inventory inventory = new Inventory();
         inventory.setId(id);
         inventory.setHeight(height);
         inventory.setWidth(width);
+        inventory.setWeight(weight);
         final ObjectMapper objectMapper = new ObjectMapper();
         try {
             inventory.setInventoryItem(objectMapper.readValue(inventoryItems, List.class));
