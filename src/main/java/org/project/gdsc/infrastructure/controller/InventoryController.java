@@ -24,7 +24,7 @@ public class InventoryController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-    @PostMapping
+    @GetMapping
     public ResponseEntity<List<Inventory>> getAllInventory() {
         List<Inventory> inventories = inventoryService.getAllInventory();
         return new ResponseEntity<>(inventories, HttpStatus.OK);

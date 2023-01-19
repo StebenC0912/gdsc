@@ -1,28 +1,31 @@
 package org.project.gdsc.domain.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class InventoryItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "name")
     private String name;
-    private int height;
-    private int weight;
-    private int width;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Column(name = "height")
+    private int height;
+
+    @Column(name = "weight")
+    private int weight;
+
+    @Column(name = "width")
+    private int width;
 
     public double volumn() {
         return height * weight * width;
     }
-
-
 }

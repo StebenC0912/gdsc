@@ -9,11 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Entity
 public class Inventory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
     private int id;
     private int height;
     private int weight;

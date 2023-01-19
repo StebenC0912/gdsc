@@ -1,9 +1,9 @@
 package org.project.gdsc.infrastructure.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.project.gdsc.domain.model.Inventory;
 
@@ -14,12 +14,21 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@Table(name = "inventory")
+
 public class InventoryEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
     private int id;
+    @Column (name = "height")
     private int height;
+    @Column (name = "weight")
     private int weight;
+    @Column (name = "width")
     private int width;
+    @Column (name = "inventoryItems")
     private String inventoryItems;
     public <InventoryItemEntity> InventoryEntity(Inventory inventory) {
         this.id = inventory.getId();
