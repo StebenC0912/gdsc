@@ -15,6 +15,10 @@ import java.util.List;
 public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
+    @GetMapping("/happy-new-year")
+    public ResponseEntity<String> happyNewYear() {
+        return new ResponseEntity<>("Happy New Year", HttpStatus.OK);
+    }
     @PostMapping
     public ResponseEntity<Integer> createInventory(@RequestBody Inventory inventory) throws Exception {
         try {
